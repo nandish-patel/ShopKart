@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products - ShopKart</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">ShopKart</div>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cart.html">Cart 🛒</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+    </ul>
+</nav>
+
+<h2 style="text-align:center;margin-top:30px;">
+Our Products
+</h2>
+
+<div class="products" id="products"></div>
+
+<script>
+
+// Check Login
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if(currentUser == null){
+    alert("Please Login First");
+    window.location.href="login.html";
+}
+
+// Product List
+let productList=[
+
+{
+id:1,
+name:"Laptop",
+price:65000,
+image:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853"
+},
+
+{
+id:2,
+name:"Smart Phone",
+price:25000,
+image:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+},
+
+{
+id:3,
+name:"Smart Watch",
+price:5000,
+image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+},
+
+{
+id:4,
+name:"Headphones",
+price:2500,
+image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+},
+
+{
+id:5,
+name:"Shoes",
+price:3000,
+image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+},
+
+{
+id:6,
+name:"Backpack",
+price:1500,
+image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62"
+}
+
+];
+
+
+
+let products=document.getElementById("products");
+
+productList.forEach(function(item){
+
+products.innerHTML +=`
+
+<div class="card">
+
+<img src="${item.image}">
+
+<h3>${item.name}</h3>
+
+<p class="price">₹${item.price}</p>
+
+<button onclick="addToCart(${item.id})">
+Add To Cart
+</button>
+
+</div>
+
+`;
+
+});
+
+function addToCart(id){
+
+let cart=JSON.parse(localStorage.getItem("cart")) || [];
+
+let product=productList.find(function(item){
+
+return item.id==id;
+
+});
+
+let exists=cart.find(function(item){
+
+return item.id==id;
+
+});
+
+if(exists){
+
+exists.quantity++;
+
+}
+
+else{
+
+product.quantity=1;
+
+cart.push(product);
+
+}
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+alert("Product Added Successfully");
+
+}
+
+function logout(){
+
+localStorage.removeItem("currentUser");
+
+alert("Logged Out");
+
+window.location.href="login.html";
+
+}
+
+</script>
+
+</body>
+</html>

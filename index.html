@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopKart - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">ShopKart</div>
+
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cart.html">Cart 🛒</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="signup.html">Signup</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+
+<section class="hero">
+
+    <h1>Welcome to ShopKart</h1>
+
+    <p>
+        Buy the latest Electronics, Fashion,
+        Shoes, Watches and much more.
+    </p>
+
+    <button onclick="window.location.href='products.html'">
+        Shop Now
+    </button>
+
+</section>
+
+<!-- Featured Products -->
+
+<h2 style="text-align:center; margin-top:40px;">
+    Featured Products
+</h2>
+
+<div class="products">
+
+    <div class="card">
+        <img src="https://picsum.photos/300/220?random=1">
+        <h3>iPhone 15</h3>
+        <p class="price">₹79,999</p>
+        <button onclick="window.location.href='products.html'">
+            View Product
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="https://picsum.photos/300/220?random=2">
+        <h3>Nike Shoes</h3>
+        <p class="price">₹4,999</p>
+        <button onclick="window.location.href='products.html'">
+            View Product
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="https://picsum.photos/300/220?random=3">
+        <h3>Smart Watch</h3>
+        <p class="price">₹2,999</p>
+        <button onclick="window.location.href='products.html'">
+            View Product
+        </button>
+    </div>
+
+    <div class="card">
+        <img src="https://picsum.photos/300/220?random=4">
+        <h3>Headphones</h3>
+        <p class="price">₹1,999</p>
+        <button onclick="window.location.href='products.html'">
+            View Product
+        </button>
+    </div>
+
+</div>
+
+<footer>
+
+    <h3>© 2026 ShopKart</h3>
+
+    <p>
+        Built for Software & Web Project
+    </p>
+
+</footer>
+
+<script>
+
+// If user is logged in,
+// show welcome message.
+
+let user = JSON.parse(localStorage.getItem("currentUser"));
+
+if(user){
+
+    let nav = document.querySelector("nav ul");
+
+    nav.innerHTML +=
+    `<li>
+        <a href="#" onclick="logout()">
+            Logout
+        </a>
+     </li>`;
+
+}
+
+function logout(){
+
+    localStorage.removeItem("currentUser");
+
+    alert("Logged Out Successfully");
+
+    location.reload();
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ShopKart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+
+<nav>
+
+    <div class="logo">
+        ShopKart
+    </div>
+
+    <ul>
+
+        <li><a href="index.html">Home</a></li>
+
+        <li><a href="signup.html">Signup</a></li>
+
+    </ul>
+
+</nav>
+
+<!-- Login Form -->
+
+<div class="container">
+
+    <h2>Login</h2>
+
+    <input type="email" id="email" placeholder="Enter Email">
+
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="login()">Login</button>
+
+    <p>
+        Don't have an account?
+        <a href="signup.html">Signup</a>
+    </p>
+
+</div>
+
+<script>
+
+function login(){
+
+    let email=document.getElementById("email").value.trim();
+
+    let password=document.getElementById("password").value;
+
+    if(email=="" || password==""){
+
+        alert("Please fill all fields");
+
+        return;
+
+    }
+
+    let users=JSON.parse(localStorage.getItem("users")) || [];
+
+    let foundUser=users.find(function(user){
+
+        return user.email===email && user.password===password;
+
+    });
+
+    if(foundUser){
+
+        localStorage.setItem("currentUser",JSON.stringify(foundUser));
+
+        alert("Login Successful");
+
+        window.location.href="products.html";
+
+    }
+
+    else{
+
+        alert("Invalid Email or Password");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

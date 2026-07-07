@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<!-- Navbar -->
+
+<nav>
+
+<div class="logo">
+
+ShopKart
+
+</div>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="products.html">Products</a></li>
+
+<li><a href="cart.html">Cart 🛒</a></li>
+
+<li><a href="#" onclick="logout()">Logout</a></li>
+
+</ul>
+
+</nav>
+
+<!-- Checkout Form -->
+
+<div class="checkout">
+
+<h2>Checkout</h2>
+
+<input
+type="text"
+id="name"
+placeholder="Full Name">
+
+<input
+type="text"
+id="address"
+placeholder="Address">
+
+<input
+type="text"
+id="phone"
+placeholder="Phone Number">
+
+<select id="payment">
+
+<option value="">
+Select Payment Method
+</option>
+
+<option>
+Cash On Delivery
+</option>
+
+<option>
+UPI
+</option>
+
+<option>
+Credit Card
+</option>
+
+<option>
+Debit Card
+</option>
+
+</select>
+
+<button onclick="placeOrder()">
+
+Place Order
+
+</button>
+
+</div>
+
+<script>
+
+let user = JSON.parse(localStorage.getItem("currentUser"));
+
+if(user){
+
+document.getElementById("name").value=user.name;
+
+}
+
+function placeOrder(){
+
+let name=document.getElementById("name").value;
+
+let address=document.getElementById("address").value;
+
+let phone=document.getElementById("phone").value;
+
+let payment=document.getElementById("payment").value;
+
+let cart=JSON.parse(localStorage.getItem("cart")) || [];
+
+if(cart.length==0){
+
+alert("Your Cart is Empty");
+
+window.location.href="products.html";
+
+return;
+
+}
+
+if(name=="" || address=="" || phone=="" || payment==""){
+
+alert("Please Fill All Details");
+
+return;
+
+}
+
+alert("🎉 Order Placed Successfully!");
+
+localStorage.removeItem("cart");
+
+window.location.href="products.html";
+
+}
+
+function logout(){
+
+localStorage.removeItem("currentUser");
+
+alert("Logged Out Successfully");
+
+window.location.href="login.html";
+
+}
+
+</script>
+
+</body>
+</html>
